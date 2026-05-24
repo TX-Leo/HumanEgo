@@ -25,12 +25,7 @@
 </p>
 
 <p align="center">
-  <video src="https://github.com/TX-Leo/HumanEgo/raw/main/assets/website/images/teaser.mp4"
-         autoplay loop muted playsinline
-         width="100%"
-         poster="assets/website/images/teaser.png">
-    <img src="assets/website/images/teaser.png" alt="HumanEgo teaser" width="100%" />
-  </video>
+  <img src="assets/teaser.gif" alt="HumanEgo teaser" width="100%" />
 </p>
 
 ---
