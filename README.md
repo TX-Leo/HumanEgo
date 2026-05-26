@@ -72,6 +72,10 @@ MPS (SLAM + hand tracking) on it.
 
 ## Preprocess
 
+<p align="center">
+  <img src="assets/data_collection.gif" alt="HumanEgo preprocessing visualization" width="100%" />
+</p>
+
 > **TODO** — documentation coming soon.
 
 ---
