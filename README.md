@@ -76,7 +76,13 @@ MPS (SLAM + hand tracking) on it.
   <img src="assets/architecture.webp" alt="HumanEgo training architecture" width="100%" />
 </p>
 
-> **TODO** — documentation coming soon.
+```bash
+python -m training.FlowMatchingTrainer --task "YOUR_TASK" --use_cfg --job "YOUR_JOB"
+```
+
+`--task` selects a folder under `cfg/training/` (e.g. `serve_bread`) and
+`--job` selects a YAML inside it (e.g. `HumanEgo`, resolving to
+`cfg/training/serve_bread/HumanEgo.yaml`).
 
 ---
 
