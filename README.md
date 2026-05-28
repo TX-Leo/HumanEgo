@@ -26,6 +26,24 @@
   <a href="#bibtex"><img src="assets/title/btn_bibtex.png" alt="BibTeX" height="60" /></a>
 </p>
 
+> 👋 **A quick note from the author**
+>
+> Hi everyone,
+>
+> Thanks so much for your interest in **HumanEgo**! I'm currently organizing the code for an upcoming release.
+>
+> Here's what to expect:
+> - A portion of the dataset
+> - A detailed doc on how to preprocess the Aria data, with clear visualization (visual part and spatial part)
+> - Training instructions
+> - Tips for inference
+>
+> I've been a bit busy these days 😭, but I'll definitely get everything out very soon.
+>
+> Thanks for your patience — happy to chat anytime if you have questions or want to discuss!
+>
+> — Leo
+
 <p align="center">
   <img src="assets/teaser.gif" alt="HumanEgo teaser" width="100%" />
 </p>
