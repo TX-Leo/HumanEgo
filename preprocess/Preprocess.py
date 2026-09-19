@@ -1,5 +1,8 @@
-# -*- coding: utf-8 -*-
-# @FileName: Preprocess.py
+# 该文件是预处理流水线的总调度文件，把一条 Aria 录像（sample.vrs + MPS）按固定顺序跑完，最后写出训练用的 training_data.json
+# -*- coding: utf-8 -*-  编码声明：显式声明该 Python 文件使用 UTF-8 字符编码 保存和读取，一个防错规范，如果是 python3 则不需要该编码声明
+# @FileName: Preprocess.py  文件名标注，给人或工具看，不影响运行。
+
+# ”“”...“”“ 是多行注释，给人或工具看，不影响运行，放在文件前面时，会成为模块的__doc__，用来写用途、流水线步骤、技术要点。运行时不会当代码执行。
 
 """
 ====================================================================================================
@@ -8,23 +11,30 @@ Preprocessing Orchestrator (Preprocess.py)
 
 Description:
     This script serves as the central orchestrator for the entire Project Aria data preprocessing 
-    pipeline. It sequentially manages the extraction of raw sensor data (AriaCam, AriaHands, 
-    AriaSlam), temporal segmentation (AriaPhases), visual semantic processing (DINOSAM, Lama), 
-    3D kinematics reconstruction (CoTracker, CamTriangulator), and dataset generation (DatasetGen).
+    pipeline. It sequentially manages the extraction of raw sensor data (AriaCam 相机, AriaHands 手, 
+    AriaSlam SLAM), temporal segmentation (AriaPhases), visual semantic processing (DINOSAM, Lama), 
+    3D kinematics reconstruction 三维运动学重建 (CoTracker, CamTriangulator), and dataset generation 数据集生成 (DatasetGen).
 
 Core Functionalities:
     1.  Initialization: Sets up VRS and MPS data providers and establishes global frame bounds.
-    2.  Base Extraction (Aria): Processes camera streams, hand tracking, and SLAM poses.
-    3.  Phase-based Indexing: Segments the video sequence into logical states (Navigation, 
-        Transition, Manipulation) and isolates an 'Object-Centric' temporal window.
+        初始化：设置 VRS 和 MPS 数据提供者，并建立全局帧边界。
+    2.  Base Extraction (Aria): Processes camera streams, hand tracking, and SLAM poses .
+        基础提取 (Aria)：处理相机流、手跟踪和 SLAM 位姿。
+    3.  Phase-based Indexing: Segments the video sequence into logical states (Navigation 导航, 
+        Transition 过渡, Manipulation 操作) and isolates an 'Object-Centric' temporal window.
+        基于阶段的分段索引：将视频序列分为逻辑状态（导航、过渡、操作），并隔离一个“对象中心”的时间窗口。
     4.  Visual-Spatial Pipeline: Executes deep learning models (DINO, SAM2, CoTracker, LaMa) 
         and geometric triangulators to establish multi-object 6-DOF tracking.
+        视觉空间管道：执行深度学习模型（DINO, SAM2, CoTracker, LaMa）和几何三角测量器，建立多对象 6-DOF 跟踪。
     5.  Consolidation: Generates the final training_data.json and comprehensive 
         video/3D visualizations.
+        整合：生成最终的 training_data.json 和全面的视频/3D 可视化。
 
 Technical Specifics:
     - Recursive Configuration: Loads a master YAML that inherently points to sub-module configs.
+        递归配置：加载主 YAML，自动解析所有嵌套的子模块配置。
     - Decorators: Uses @time_it for precise performance profiling of each pipeline stage.
+        装饰器：使用 @time_it 进行每个流水线阶段的精确性能分析。
 ====================================================================================================
 """
 import os
@@ -32,12 +42,14 @@ import argparse
 import shutil
 import time
 from tqdm import tqdm
-import json
+import json  # 读写 json
 import re
 import traceback
 import cv2
+# 导入，项目内部模块
 
-from projectaria_tools.core import data_provider, mps
+# Project Aria SDK（Software Development Kit）
+from projectaria_tools.core import data_provider, mps  # 打开 .vrs录像，读相机流、时间戳
 from projectaria_tools.core.mps import MpsDataPathsProvider, MpsDataProvider
 from projectaria_tools.core.sensor_data import TimeDomain
 
